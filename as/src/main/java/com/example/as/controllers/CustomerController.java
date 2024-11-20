@@ -28,4 +28,14 @@ public class CustomerController {
     Customer saveCustomer(@RequestBody Customer customer) {
         return customerService.save(customer);
     }
+
+    @PutMapping
+    Customer updateCustomer(@RequestBody Customer customer) {
+        return customerService.save(customer);
+    }
+
+    @DeleteMapping
+    public void deleteCustomer(Long id) {
+        customerService.delete(id);
+    }
 }
