@@ -2,10 +2,9 @@ package com.example.as.controllers;
 
 import com.example.as.models.Customer;
 import com.example.as.repositories.CustomerRepository;
+import com.example.as.services.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -14,16 +13,19 @@ import java.util.List;
 public class CustomerController {
 
     final
-    CustomerRepository customerRepository;
+    CustomerService customerService;
 
-    public CustomerController(CustomerRepository customerRepository) {
-        this.customerRepository = customerRepository;
+    public CustomerController(CustomerService customerService) {
+        this.customerService = customerService;
     }
 
     @GetMapping
     List<Customer> listAllCustomers(){
-        return customerRepository.findAll();
+        return customerService.findAll();
     }
 
-
+    @PostMapping
+    Customer saveCustomer(@RequestBody Customer customer) {
+        return customerService.save(customer);
+    }
 }
